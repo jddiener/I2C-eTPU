@@ -7,6 +7,7 @@ This project is an I2C eTPU driver that supports all the major features of the s
 - unexpected NACKs reported
 - clock stretching (synchronization) by slave devices
 - interrupt on transfer completion
+
 The slave support includes:
 - up to 400 KHz operation, or better.  The actual limit depends upon the eTPU clock rate and other functions in the eTPU.
 - programmable 7-bit address
