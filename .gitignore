@@ -1,0 +1,10 @@
+*.report
+*.lst
+*.eao
+*.elf
+*.o
+*.coff
+*.log
+*.CoverageData
+*.TotalCoverageData
+*.Coverage

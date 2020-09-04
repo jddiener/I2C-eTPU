@@ -1,0 +1,766 @@
+<html>
+<head>
+<title>Analyes File: etpu_set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<style id="Resource Dependency Analyses_18854_Styles">
+.Normal       {                     font-size:11.0pt;  text-align: center;}
+.NormalLeft   {                     font-size:11.0pt;  text-align: left;}
+.LightGrey    { background:#DDDDDD; font-size:11.0pt;  text-align: center;}
+.LightBlue    { background:#E0FFFF; font-size:11.0pt;  text-align: left;}
+.MediumBlue   { background:#C0E8F0; font-size:11.0pt;  text-align: center;}
+.LightGreen   { background:#00CC00; font-size:11.0pt;  text-align: center;}
+.Yellow       { background:#FFFF00; font-size:12.0pt;  text-align: center;}
+.LightRed     { background:#FFC0D0; font-size:11.0pt;  text-align: center;}
+.LightRedLeft { background:#FFC0D0; font-size:11.0pt;  text-align: left;}
+.LightYellow  { background:#FFFF99; font-size:11.0pt;  text-align: center;}
+.VagueRed     { background:#FFF0E0; font-size:11.0pt;  text-align: center;}
+.Purple       { background:#FFC0F0; font-size:11.0pt;  text-align: center;}
+.Busy         { background:#FFFF99; font-size:11.0pt; text-align: center;}
+.Arc          { background:#CCCCCC; font-size:11.0pt; text-align: center;}
+.Node         { background:#33FF33; font-size:11.0pt; text-align: center;}
+.Unused       { background:#FF7777; font-size:11.0pt; text-align: center;}
+.ChangedCode  { background:#FFE8F4; font-size:8.5pt; text-align: center;}
+.tiny             {                     font-size:8.5pt;  text-align: center; color: lime; }
+.TableTitle     { background:#FFFFFF; font-size:12.0pt; text-align: center; color: black; font-weight: bold; }
+.TableH1C1      { background:#FFFF00; font-size:12.0pt; text-align: left;}
+.TableH1Cn      { background:#FFFF00; font-size:12.0pt; text-align: center; color: black; font-weight: bold; }
+.TableH2C1      { background:#F0F0F8; font-size:11.0pt; text-align: left;}
+.TableH2Cn      { background:#F0F0F8; font-size:12.0pt; text-align: center; color: black; font-weight: bold; }
+.TableBodyC1    {                     font-size:11.0pt; text-align: left;}
+.TableBodyCn    {                     font-size:11.0pt; text-align: center;}
+.TableBodyWcC1  {                     font-size:12.0pt; text-align: left; color: red; font-weight: bold; }
+.TableBodyWcCn  {                     font-size:12.0pt; text-align: center; color: red; font-weight: bold; }
+</style>
+
+<body bgcolor="#FFFFFF">
+
+<small><p> Created on 2020-09-04, 14:38:39.388</p></small>
+
+<h3>Worst Case Thread Lengths</h3>
+<blockquote>
+<table border=1 cellpadding=0 cellspacing=0>
+
+	<col width=400 align=left>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<tr>
+		<td  class=TableTitle>Thead/Function</td>
+		<td  class=TableTitle>Steps</td>
+		<td  class=TableTitle>Ram Accesses</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH1C1>I2C_master  <!-- 0 --></td>
+		<td  class=TableH1Cn>43</td>
+		<td  class=TableH1Cn>22</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::I2C_SCL_out  <!-- 1 --></td>
+		<td  class=TableH2Cn>4</td>
+		<td  class=TableH2Cn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::InitSCL_out  <!-- 2 --></td>
+		<td  class=TableBodyWcCn>4</td>
+		<td  class=TableBodyWcCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::I2C_SCL_in  <!-- 3 --></td>
+		<td  class=TableH2Cn>4</td>
+		<td  class=TableH2Cn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::InitSCL_in  <!-- 4 --></td>
+		<td  class=TableBodyWcCn>4</td>
+		<td  class=TableBodyWcCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::I2C_SDA_out  <!-- 5 --></td>
+		<td  class=TableH2Cn>4</td>
+		<td  class=TableH2Cn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::InitSDA_out  <!-- 6 --></td>
+		<td  class=TableBodyWcCn>4</td>
+		<td  class=TableBodyWcCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::I2C_SDA_in  <!-- 7 --></td>
+		<td  class=TableH2Cn>43</td>
+		<td  class=TableH2Cn>22</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::InitSDA_in  <!-- 8 --></td>
+		<td  class=TableBodyCn>4</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::Shutdown  <!-- 9 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::Shutdown  <!-- 10 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::Shutdown  <!-- 11 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::Shutdown  <!-- 12 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::LatchAndClearErrorFlags  <!-- 13 --></td>
+		<td  class=TableBodyCn>3</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::StartTransfer  <!-- 14 --></td>
+		<td  class=TableBodyCn>38</td>
+		<td  class=TableBodyCn>21</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::PulseClock  <!-- 15 --></td>
+		<td  class=TableBodyCn>35</td>
+		<td  class=TableBodyCn>13</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::PulseClockIgnore  <!-- 16 --></td>
+		<td  class=TableBodyWcCn>43</td>
+		<td  class=TableBodyWcCn>15</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::ProcessAck  <!-- 17 --></td>
+		<td  class=TableBodyCn>31</td>
+		<td  class=TableBodyCn>9</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::ProcessAck_Step2  <!-- 18 --></td>
+		<td  class=TableBodyWcCn>43</td>
+		<td  class=TableBodyWcCn>22</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::ProcessAckIgnore  <!-- 19 --></td>
+		<td  class=TableBodyCn>1</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::BeginStop  <!-- 20 --></td>
+		<td  class=TableBodyCn>12</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::FinishStop  <!-- 21 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>1</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::FinishRepeatedStart  <!-- 22 --></td>
+		<td  class=TableBodyCn>14</td>
+		<td  class=TableBodyCn>4</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_master::FinishRepeatedStartIgnore  <!-- 23 --></td>
+		<td  class=TableBodyCn>1</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 24 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 25 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 26 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 27 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH1C1>I2C_slave  <!-- 28 --></td>
+		<td  class=TableH1Cn>70</td>
+		<td  class=TableH1Cn>20</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::I2C_SCL_in  <!-- 29 --></td>
+		<td  class=TableH2Cn>6</td>
+		<td  class=TableH2Cn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::InitSCL_in  <!-- 30 --></td>
+		<td  class=TableBodyWcCn>6</td>
+		<td  class=TableBodyWcCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::I2C_SCL_out  <!-- 31 --></td>
+		<td  class=TableH2Cn>4</td>
+		<td  class=TableH2Cn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::InitSCL_out  <!-- 32 --></td>
+		<td  class=TableBodyWcCn>4</td>
+		<td  class=TableBodyWcCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::I2C_SDA_in  <!-- 33 --></td>
+		<td  class=TableH2Cn>6</td>
+		<td  class=TableH2Cn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::InitSDA_in  <!-- 34 --></td>
+		<td  class=TableBodyWcCn>6</td>
+		<td  class=TableBodyWcCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::I2C_SDA_out  <!-- 35 --></td>
+		<td  class=TableH2Cn>70</td>
+		<td  class=TableH2Cn>20</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::InitSDA_out  <!-- 36 --></td>
+		<td  class=TableBodyCn>4</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::Shutdown  <!-- 37 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::Shutdown  <!-- 38 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::Shutdown  <!-- 39 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::Shutdown  <!-- 40 --></td>
+		<td  class=TableBodyCn>2</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::ReadDataReady  <!-- 41 --></td>
+		<td  class=TableBodyCn>39</td>
+		<td  class=TableBodyCn>13</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::LatchAndClearErrorFlags  <!-- 42 --></td>
+		<td  class=TableBodyCn>3</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::IdleDetectPass_SDA  <!-- 43 --></td>
+		<td  class=TableBodyCn>13</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::IdleDetectPass_SCL  <!-- 44 --></td>
+		<td  class=TableBodyCn>12</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::IdleDetectFail_SDA  <!-- 45 --></td>
+		<td  class=TableBodyCn>9</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::IdleDetectFail_SCL  <!-- 46 --></td>
+		<td  class=TableBodyCn>9</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::TransferStart_SDA  <!-- 47 --></td>
+		<td  class=TableBodyCn>16</td>
+		<td  class=TableBodyCn>3</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::TransferStart_SCL  <!-- 48 --></td>
+		<td  class=TableBodyCn>18</td>
+		<td  class=TableBodyCn>5</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::DataBitReady  <!-- 49 --></td>
+		<td  class=TableBodyCn>50</td>
+		<td  class=TableBodyCn>11</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::OutputDataBit  <!-- 50 --></td>
+		<td  class=TableBodyCn>21</td>
+		<td  class=TableBodyCn>6</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyWcC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::HandleAck  <!-- 51 --></td>
+		<td  class=TableBodyWcCn>70</td>
+		<td  class=TableBodyWcCn>20</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::FoundStop  <!-- 52 --></td>
+		<td  class=TableBodyCn>19</td>
+		<td  class=TableBodyCn>6</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::FoundRepeatedStart  <!-- 53 --></td>
+		<td  class=TableBodyCn>19</td>
+		<td  class=TableBodyCn>6</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 54 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 55 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 56 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Error_handler_entry  <!-- 57 --></td>
+		<td  class=TableBodyCn>20</td>
+		<td  class=TableBodyCn>2</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH2C1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::Member Functions  <!-- 58 --></td>
+		<td  class=TableH2Cn>--</td>
+		<td  class=TableH2Cn>--</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2C_slave::IdleDetectPass  <!-- 59 --></td>
+		<td  class=TableBodyCn>na (10)</td>
+		<td  class=TableBodyCn>na (3)</td>
+	</tr>
+
+</table>
+
+</blockquote>
+<div style="page-break-after:always;"> </div>
+
+
+<small><p>Note: for 'C' functions that both 'return' and 'end', the number in parentheses is the Worst Case 'end' route.</p></small>
+
+
+<small><p>Note: 'na' is used to denote 'C' functions that have no 'return' route.</p></small>
+
+<h3>Worst Case Latency</h3>
+<blockquote>
+<table border=1 cellpadding=0 cellspacing=0>
+
+	<col width=400 align=left>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<tr>
+		<td  class=TableTitle>Channel/Function</td>
+		<td  class=TableTitle>Priority</td>
+		<td  class=TableTitle>WCTL*</td>
+		<td  class=TableTitle>Max WCL</td>
+		<td  class=TableTitle>Actual WCL</td>
+	</tr>
+
+</table>
+
+</blockquote>
+<div style="page-break-after:always;"> </div>
+
+
+<small><p>Note: No System Configuration file was loaded (see -sysConfig=&ltFileName&gt)</p></small>
+
+<h3>Source Code File Information</h3>
+<blockquote>
+<table border=1 cellpadding=0 cellspacing=0>
+
+	<col width=400 align=left>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<tr>
+		<td  class=TableTitle>File</td>
+		<td  class=TableTitle>Opcodes</td>
+		<td  class=TableTitle>Code Size (bytes)</td>
+		<td  class=TableTitle>Start</td>
+		<td  class=TableTitle>Stop</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>etec_i2c_slave.c</td>
+		<td  class=TableBodyCn>322</td>
+		<td  class=TableBodyCn>1288</td>
+		<td  class=TableBodyCn>0xC78</td>
+		<td  class=TableBodyCn>0x117C</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>etec_i2c_master.c</td>
+		<td  class=TableBodyCn>286</td>
+		<td  class=TableBodyCn>1144</td>
+		<td  class=TableBodyCn>0x800</td>
+		<td  class=TableBodyCn>0xC74</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>_global_error_handler.lib</td>
+		<td  class=TableBodyCn>29</td>
+		<td  class=TableBodyCn>116</td>
+		<td  class=TableBodyCn>0x1180</td>
+		<td  class=TableBodyCn>0x11F0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableTitle>TOTAL</td>
+		<td  class=TableTitle>637</td>
+		<td  class=TableTitle>2548</td>
+		<td  class=TableTitle>0x800</td>
+		<td  class=TableTitle>0x11F0</td>
+	</tr>
+
+</table>
+
+</blockquote>
+<div style="page-break-after:always;"> </div>
+
+
+<small><p>Note:  The entry table is not included in the 'Code Size' column.</p></small>
+
+<h3>Call Tree (max stack is 0 bytes)</h3>
+<blockquote>
+<table border=1 cellpadding=0 cellspacing=0>
+
+	<col width=400 align=left>
+	<col width=75 align=center>
+	<col width=75 align=center>
+	<tr>
+		<td  class=TableTitle>Thead/Function</td>
+		<td  class=TableTitle>Stack for Locals and Calls</td>
+		<td  class=TableTitle>Max. Stack Depth</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH1C1>I2C_master <!-- 121 --></td>
+		<td  class=TableH1Cn>&nbsp;</td>
+		<td  class=TableH1Cn>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSCL_out <!-- 120 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSCL_in <!-- 122 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSDA_out <!-- 123 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSDA_in <!-- 124 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;Shutdown <!-- 125 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;LatchAndClearErrorFlags <!-- 126 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;StartTransfer <!-- 127 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;PulseClock <!-- 128 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;PulseClockIgnore <!-- 129 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;ProcessAck <!-- 130 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;ProcessAck_Step2 <!-- 131 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;ProcessAckIgnore <!-- 132 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;BeginStop <!-- 133 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;FinishStop <!-- 134 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;FinishRepeatedStart <!-- 135 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;FinishRepeatedStartIgnore <!-- 136 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH1C1>I2C_slave <!-- 138 --></td>
+		<td  class=TableH1Cn>&nbsp;</td>
+		<td  class=TableH1Cn>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSCL_in <!-- 137 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSCL_out <!-- 139 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSDA_in <!-- 140 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;InitSDA_out <!-- 141 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;Shutdown <!-- 142 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;ReadDataReady <!-- 143 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;LatchAndClearErrorFlags <!-- 144 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;IdleDetectPass_SDA <!-- 145 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_I2C_slave_AW613E_IdleDetectPass_ <!-- 146 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;IdleDetectPass_SCL <!-- 147 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_I2C_slave_AW613E_IdleDetectPass_ <!-- 148 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;IdleDetectFail_SDA <!-- 149 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;IdleDetectFail_SCL <!-- 150 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;TransferStart_SDA <!-- 151 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;TransferStart_SCL <!-- 152 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;DataBitReady <!-- 153 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;OutputDataBit <!-- 154 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;HandleAck <!-- 155 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;FoundStop <!-- 156 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;FoundRepeatedStart <!-- 157 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+	<tr>
+		<td  class=TableH1C1>(GlobalThreads) <!-- 159 --></td>
+		<td  class=TableH1Cn>&nbsp;</td>
+		<td  class=TableH1Cn>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td  class=TableBodyC1>&nbsp;&nbsp;&nbsp;_Error_handler_entry <!-- 158 --></td>
+		<td  class=TableBodyCn>0</td>
+		<td  class=TableBodyCn>0</td>
+	</tr>
+
+</table>
+
+</blockquote>
+<div style="page-break-after:always;"> </div>
+
+</body>
+</html>

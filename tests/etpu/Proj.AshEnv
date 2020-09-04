@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<user creator="ASH WARE, Inc." version="2.72.2.0">
+  <source_code_search />
+  <app_dimensions x="102" y="6" w="1728" h="1038" />
+  <splitter name="projectBtmSplitter" distance="685" total="924" orientation="horizontal" />
+  <splitter name="projectRhtSplitter" parent="projectBtmSplitter" order="1" distance="243" total="1712" orientation="vertical" />
+  <splitter name="editSplitter" parent="projectRhtSplitter" order="2" distance="784" total="1465" orientation="vertical" />
+  <splitter name="outputSplitter" parent="projectBtmSplitter" order="2" distance="1046" total="1712" orientation="vertical" />
+  <line_info_mgr />
+  <TabPage type="LogicAnalyzer" ctrl="output1TabControl" sel="true">
+    <ScopeSettings selected_channel="0" selected_cursor="0" auto_scroll="False" first_chan="0" width="125" />
+    <ScopeTimes>
+      <LeftSide word_a="0" word_b="129" word_c="3688014878" />
+      <Width word_a="0" word_b="789" word_c="2672141164" />
+      <LeftCursor word_a="0" word_b="10" word_c="3385234860" />
+      <RightCursor word_a="0" word_b="567" word_c="3425950167" />
+    </ScopeTimes>
+    <ClocksTimeOptions />
+    <TimeDisplayOptions />
+    <ThreadGroups>
+      <eTPU_A index="0" group_a="256" group_b="16" group_c="8388608" group_d="8" group_e="16" group_f="32" group_g="64" group_h="128" />
+    </ThreadGroups>
+    <ScopeChannels>
+      <ScopeChan index="0" name="_ch2.out" alias="SCL_out_master" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="1" name="_ch3.in" alias="SCL_in_master" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="2" name="_ch4.out" alias="SDA_out_master" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="3" name="_ch5.in" alias="SDA_in_master" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="4" name="_ch21.in" alias="SDA_BUS" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="5" name="_ch20.in" alias="SCL_BUS" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="6" name="_ch12.in" alias="SDA_in_slave" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="7" name="_ch13.out" alias="SDA_out_slave" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="8" name="_ch10.in" alias="SCL_in_slave" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="9" name="_ch11.out" alias="SCL_out_slave" target_index="0" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="10" name="_ThreadsIdle" alias="_ThreadsIdle" target_index="0" height="31" />
+      <ScopeChan index="11" name="_ThreadsTst" alias="_ThreadsTst" target_index="0" height="31" />
+    </ScopeChannels>
+  </TabPage>
+  <TabPage type="Breakpoint" is_closed="true" ctrl="projectTabControl" />
+  <TabPage type="TraceBuf" is_closed="true" ctrl="output2TabControl">
+    <eTPU_A />
+  </TabPage>
+  <TabPage type="Watch" is_closed="true" ctrl="projectTabControl">
+    <Columns />
+    <SymbolList />
+  </TabPage>
+  <TabPage type="Script" ctrl="edit1TabControl" file="WriteTest.ETpuCommand" top_line="0" sel="true" focus="true" start_pos="131" len="15" sel_text="etpu/_etpu_set/" />
+  <TabPage type="Text" ctrl="edit2TabControl" file="ReadMe.txt" top_line="0" sel="true" start_pos="0" len="0" sel_text="" />
+  <TabPage type="Output" ctrl="output1TabControl" />
+  <TabPage type="ChannelFrame" ctrl="output2TabControl" sel="true" target="0" channel="2">
+    <Columns />
+  </TabPage>
+  <TabPage type="Project" ctrl="projectTabControl" file="Proj.ETpuIdeProj" sel="true" />
+  <selected_project_node name="Mk.bat" />
+  <!--Saved last-used directories-->
+  <last_dir type="ConsoleBat" dir="..\..\etpu\_etpu_set\" />
+  <last_dir type="ExternalBuildExe" dir="..\..\etpu\_etpu_set\" />
+  <last_dir type="Text" dir="..\..\" />
+  <last_dir type="Html" dir="..\..\" />
+  <search_dialog>
+    <find val=".bat" />
+    <find val="etpu_set" />
+    <replace val="MyCode" />
+    <replace val="etpu_set" />
+    <directory val="C:\GIT\I2C-eTPU\tests\etpu\" />
+    <directory val="C:\Mtdt\TestsHigh\I2C\Tests\Etpu\" />
+    <directory val="C:\ASHWARE\MtdtCode\Mtdt_trunk1\Mtdt\TestsHigh\I2C\Tests\Etpu\" />
+    <file_types val="*.c,*.h" />
+    <file_types val="*.ETpuCommand" />
+    <file_types val="*.Vector" />
+  </search_dialog>
+  <workshops enabled="False" />
+  <ide_is_setting />
+  <step_asm_multiple val="10" />
+  <step_angle_teeth_multiple val="3" />
+  <is_goto_abs_angle val="false" />
+  <goto_absolute_angle cycles="1" degrees="2" hundredths="3" />
+  <goto_delta_angle cycles="4" degrees="5" hundredths="6" />
+  <goto_absolute_time ks="0" sec="0" ms="3" us="793" ns="602" />
+  <goto_delta_time ks="0" sec="0" ms="0" us="10" ns="0" />
+  <is_goto_abs_time val="false" />
+  <goto_line_num val="10" />
+  <make_node target="eTPU_A" file="WriteTest.ETpuCommand" time="5249033715121231641">
+    <dependent_file file="WriteTest.ETpuCommand" time="5249033715121231641" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5248851424895949675" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_defines.h" time="5249033715756485860" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_idata.h" time="5249033715756465569" />
+  </make_node>
+  <make_node target="eTPU_A" file="Base.Vector" time="5248851424895792060">
+    <dependent_file file="Base.Vector" time="5248851424895792060" />
+  </make_node>
+  <source_file name="ReadMe.txt" tool="None" />
+  <source_file name="Test.bat" tool="None" />
+  <!--=======================================================-->
+  <!--======    START TARGET-SPECIFIC SETTINGS        =======-->
+  <target name="eTPU_A" />
+  <!--======    END TARGET-SPECIFIC SETTINGS          =======-->
+  <!--=======================================================-->
+</user>

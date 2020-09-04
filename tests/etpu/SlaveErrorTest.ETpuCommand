@@ -1,0 +1,370 @@
+// test I2C error detect (slave)
+
+// include host-eTPU common definitions and
+// the auto-defines file
+#include "../../etpu/_etpu_set/etpu_i2c_common.h"
+#include "../../etpu/_etpu_set/etpu_set_defines.h"
+
+// load the initialized global data into memory
+#undef __GLOBAL_MEM_INIT32
+#define __GLOBAL_MEM_INIT32(address, value) *((ETPU_DATA_SPACE U32 *) address) = value;
+#include "../../etpu/_etpu_set/etpu_set_idata.h"
+#undef __GLOBAL_MEM_INIT32
+
+//--------------------------------------------------------
+// Global eTPU initialization
+//--------------------------------------------------------
+
+write_entry_table_base_addr(_ENTRY_TABLE_BASE_ADDR_);
+
+set_clk_period(5000000); // 200 MHz, for simplicity (TCR1 == 100MHz)
+
+// Configure the etpu
+write_tcr1_control(2);        // System clock/2,  NOT gated by TCRCLK
+write_tcr1_prescaler(1);
+write_global_time_base_enable(1);
+
+//--------------------------------------------------------
+// eTPU Channel initialization
+//--------------------------------------------------------
+
+#define I2C_MASTER_CHAN		2
+#define I2C_SLAVE_CHAN		10
+
+#define I2C_MASTER_BASE		_CHANNEL_FRAME_1ETPU_BASE_ADDR
+#define I2C_SLAVE_BASE		I2C_MASTER_BASE + _FRAME_SIZE_I2C_master_
+
+#define I2C_MASTER_CMD_BUFFER		0x400
+#define I2C_MASTER_WRITE_BUFFER		0x440
+#define I2C_MASTER_READ_BUFFER		0x480
+
+#define I2C_SLAVE_WRITE_BUFFER		0x500
+#define I2C_SLAVE_READ_BUFFER		0x580
+
+// Configure the I2C master channels
+// SCL_out
+write_chan_func           ( I2C_MASTER_CHAN, _FUNCTION_NUM_I2C_master_I2C_SCL_out_);
+write_chan_base_addr      ( I2C_MASTER_CHAN, I2C_MASTER_BASE);
+write_chan_entry_condition( I2C_MASTER_CHAN, _ENTRY_TABLE_TYPE_I2C_master_I2C_SCL_out_);
+write_chan_entry_pin_direction(I2C_MASTER_CHAN, _ENTRY_TABLE_PIN_DIR_I2C_master_I2C_SCL_out_);
+write_chan_cpr            ( I2C_MASTER_CHAN, 3);
+// SCL_in
+write_chan_func           ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, _FUNCTION_NUM_I2C_master_I2C_SCL_in_);
+write_chan_base_addr      ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, I2C_MASTER_BASE);
+write_chan_entry_condition( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, _ENTRY_TABLE_TYPE_I2C_master_I2C_SCL_in_);
+write_chan_entry_pin_direction(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_master_I2C_SCL_in_);
+write_chan_cpr            ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, 3);
+// SDA_out
+write_chan_func           ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, _FUNCTION_NUM_I2C_master_I2C_SDA_out_);
+write_chan_base_addr      ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, I2C_MASTER_BASE);
+write_chan_entry_condition( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, _ENTRY_TABLE_TYPE_I2C_master_I2C_SDA_out_);
+write_chan_entry_pin_direction(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_master_I2C_SDA_out_);
+write_chan_cpr            ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, 3);
+// SDA_in
+write_chan_func           ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, _FUNCTION_NUM_I2C_master_I2C_SDA_in_);
+write_chan_base_addr      ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, I2C_MASTER_BASE);
+write_chan_entry_condition( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, _ENTRY_TABLE_TYPE_I2C_master_I2C_SDA_in_);
+write_chan_entry_pin_direction(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_master_I2C_SDA_in_);
+write_chan_cpr            ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, 3);
+
+// I2C master channel data config
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__p_cmd_list_, I2C_MASTER_CMD_BUFFER); // set up ptr to cmd buffer
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tLOW_, 500);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tHIGH_, 500);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tBUF_, 500);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tSU_STA_, 500);
+//write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tHD_STA_, 500);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tSU_STO_, 500);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tHD_DAT_, 50);
+write_chan_data24 ( I2C_MASTER_CHAN, _CPBA24_I2C_master__tr_max_, 100);
+
+// config the I2C slave channels
+// SDA_in
+write_chan_func           ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, _FUNCTION_NUM_I2C_slave_I2C_SDA_in_);
+write_chan_base_addr      ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, I2C_SLAVE_BASE);
+write_chan_entry_condition( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, _ENTRY_TABLE_TYPE_I2C_slave_I2C_SDA_in_);
+write_chan_entry_pin_direction(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_slave_I2C_SDA_in_);
+write_chan_cpr            ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, 3);
+write_chan_func           ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, _FUNCTION_NUM_I2C_slave_I2C_SDA_out_);
+write_chan_base_addr      ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, I2C_SLAVE_BASE);
+write_chan_entry_condition( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, _ENTRY_TABLE_TYPE_I2C_slave_I2C_SDA_out_);
+write_chan_entry_pin_direction(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_slave_I2C_SDA_out_);
+write_chan_cpr            ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, 3);
+write_chan_func           ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, _FUNCTION_NUM_I2C_slave_I2C_SCL_in_);
+write_chan_base_addr      ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, I2C_SLAVE_BASE);
+write_chan_entry_condition( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, _ENTRY_TABLE_TYPE_I2C_slave_I2C_SCL_in_);
+write_chan_entry_pin_direction(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_slave_I2C_SCL_in_);
+write_chan_cpr            ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, 3);
+write_chan_func           ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, _FUNCTION_NUM_I2C_slave_I2C_SCL_out_);
+write_chan_base_addr      ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, I2C_SLAVE_BASE);
+write_chan_entry_condition( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, _ENTRY_TABLE_TYPE_I2C_slave_I2C_SCL_out_);
+write_chan_entry_pin_direction(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, _ENTRY_TABLE_PIN_DIR_I2C_slave_I2C_SCL_out_);
+write_chan_cpr            ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 3);
+
+// I2C slave channel data config
+write_chan_data8  ( I2C_SLAVE_CHAN, _CPBA8_I2C_slave__address_, 0x90);
+write_chan_data8  ( I2C_SLAVE_CHAN, _CPBA8_I2C_slave__address_mask_, 0xfe); // look at all bits but R/W
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__read_buffer_, I2C_SLAVE_READ_BUFFER);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__read_buffer_size_, 0x80);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__write_buffer_, I2C_SLAVE_WRITE_BUFFER);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__write_buffer_size_, 0x80);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__tBUF_, 1000);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__tSU_DAT_, 50);
+
+write_chan_mode   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, ETPU_I2C_SLAVE_DATA_READY_FM0);
+
+// link up master & slave pins
+
+// create waveform of SCL & SDA wires
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET + 32, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET + 32, 20);
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET + 32, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET + 32, 21);
+
+// feed bus pins into inputs
+place_buffer(20, I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET);
+place_buffer(20, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+place_buffer(21, I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET);
+place_buffer(21, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+
+//--------------------------------------------------------
+// BEGIN TEST
+
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET, ETPU_I2C_INIT_HSR);
+
+write_chan_hsrr   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, ETPU_I2C_INIT_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, ETPU_I2C_INIT_HSR);
+
+at_time(100);
+// issue a message transfer request (write) with an incorrect START
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x90;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 1;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x0)) = 0x55;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+// disrupt the START sequence
+at_time(102);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 0);
+at_time(115);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 1);
+
+at_time(245);
+write_chan_hsrr   ( I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, ETPU_I2C_LATCH_CLEAR_ERRORS_HSR);
+at_time(250);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__latched_error_flags_, ETPU_I2C_SLAVE_INVALID_START);
+verify_mem_u32(ETPU_DATA_SPACE, I2C_SLAVE_WRITE_BUFFER + 00, 0xffffffff, 0x00000000);
+verify_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, 0);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, 0);
+clear_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+
+
+#if 0 // this "warning" has been eliminated
+at_time(300);
+// issue a message transfer request (write) with a too short START hold time
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x90;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 1;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x0)) = 0x55;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+// mistime the START sequence
+at_time(307);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 0);
+at_time(315);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 1);
+
+at_time(325);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_INVALID_START_HD);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+
+// still reads message, but issues "warning"
+at_time(550);
+verify_mem_u32(ETPU_DATA_SPACE, I2C_SLAVE_WRITE_BUFFER + 00, 0xffffffff, 0x55000000);
+verify_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, 0);
+clear_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+#endif
+
+
+// test buffer overflows
+
+at_time(1000);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__read_buffer_size_, 0x1);
+write_chan_data24 ( I2C_SLAVE_CHAN, _CPBA24_I2C_slave__write_buffer_size_, 0x2);
+// issue a message transfer request (write)
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x90;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 4;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x0)) = 0x12;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x1)) = 0x34;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x2)) = 0x56;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x3)) = 0x78;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+at_time(1600);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_BUFFER_OVERFLOW);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+verify_mem_u32(ETPU_DATA_SPACE, I2C_SLAVE_WRITE_BUFFER + 00, 0xffffffff, 0x12340000);
+verify_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, 0);
+clear_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+
+
+at_time(2000);
+// issue a message transfer request (read)
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x91;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_READ_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 4;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x0)) = 0x11;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x1)) = 0x22;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x2)) = 0x33;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x3)) = 0x44;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+clear_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+at_time(2600);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_BUFFER_OVERFLOW);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+verify_mem_u32(ETPU_DATA_SPACE, I2C_MASTER_READ_BUFFER + 00, 0xffffffff, 0x11000000);
+verify_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET, 1);
+verify_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET, 0);
+clear_chan_intr(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+clear_chan_intr(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+
+
+at_time(3000);
+// issue a message transfer request (read) with an invalid STOP
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x91;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 1;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x0)) = 0xaa;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+// mistime the STOP sequence
+at_time(3198);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 0);
+at_time(3210);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 1);
+
+at_time(3250);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_STOP_FAILED);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+
+
+at_time(3500);
+// issue a message transfer request (write) with an invalid STOP
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x90;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 1;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x0)) = 0x33;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 1);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+// mistime the STOP sequence
+at_time(3700.4);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 0);
+at_time(3710);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 1);
+
+at_time(3750);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_STOP_FAILED);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+
+at_time(4000);
+// generated an errant repeated START condition
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x90;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_WRITE_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 0 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 2;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 1 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_header_)) = 0x91;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 1 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_p_buffer_)) = I2C_MASTER_READ_BUFFER;
+*((ETPU_DATA_SPACE U24 *)(I2C_MASTER_CMD_BUFFER + _CHAN_TAG_TYPE_SIZE_I2C_cmd_ * 1 + 
+	_CHAN_MEMBER_BYTEOFFSET_I2C_master_I2C_cmd_size_)) = 2;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x0)) = 0x45;
+*((ETPU_DATA_SPACE U8 *)(I2C_MASTER_WRITE_BUFFER + 0x1)) = 0x67;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x0)) = 0x89;
+*((ETPU_DATA_SPACE U8 *)(I2C_SLAVE_READ_BUFFER + 0x1)) = 0xAB;
+write_chan_data8  ( I2C_MASTER_CHAN, _CPBA8_I2C_master__cmd_cnt_, 2);
+write_chan_hsrr   ( I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_MASTER_START_TRANSFER_HSR);
+
+// mistime the STOP sequence
+at_time(4290.75);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 0);
+at_time(4292);
+write_chan_output_pin(I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET, 1);
+
+at_time(4350);
+verify_chan_data8(I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, ETPU_I2C_SLAVE_INVALID_START);
+write_chan_data8 (I2C_SLAVE_CHAN, _CPBA8_I2C_slave__error_flags_, 0);
+
+wait_time(100);
+
+// full shutdown
+write_chan_hsrr   ( I2C_MASTER_CHAN+ETPU_I2C_MASTER_SCL_OUT_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN+ETPU_I2C_MASTER_SCL_IN_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN+ETPU_I2C_MASTER_SDA_OUT_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_MASTER_CHAN+ETPU_I2C_MASTER_SDA_IN_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+
+write_chan_hsrr   ( I2C_SLAVE_CHAN+ETPU_I2C_SLAVE_SDA_IN_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN+ETPU_I2C_SLAVE_SDA_OUT_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN+ETPU_I2C_SLAVE_SCL_IN_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+write_chan_hsrr   ( I2C_SLAVE_CHAN+ETPU_I2C_SLAVE_SCL_OUT_OFFSET, ETPU_I2C_SHUTDOWN_HSR);
+
+wait_time(10);
+
+
+//======= save off coverage data =============
+save_cumulative_file_coverage("etec_i2c_master.c", "SlaveErrorTest_master.CoverageData");
+save_cumulative_file_coverage("etec_i2c_slave.c", "SlaveErrorTest_slave.CoverageData");
+
+//--------------------------------------------------------
+//  That is all she wrote!!
+#ifdef _ASH_WARE_AUTO_RUN_
+exit();
+#else
+print("All tests are done!!");
+#endif // _ASH_WARE_AUTO_RUN_

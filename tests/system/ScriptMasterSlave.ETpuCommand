@@ -1,0 +1,25 @@
+#include "../../etpu/_etpu_set/etpu_i2c_common.h"
+
+// The period is in femto seconds which is one billionth of a micro-second
+// A simple conversion is to invert the MHz and multiply by a billion
+// E.G.:   1e9/128 = 59601860 femto-seconds.
+set_clk_period(7812500);  // 128 MHZ
+
+#define I2C_MASTER_CHAN		0
+#define I2C_SLAVE_CHAN		10
+
+#define I2C_VECTOR_INPUT_CHAN	14
+
+// create waveform of SCL & SDA wires
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET + 32, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET + 32, 22);
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET + 32, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET + 32, 23);
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET + 32, I2C_VECTOR_INPUT_CHAN + 32, 24);
+place_and_gate(I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET + 32, I2C_VECTOR_INPUT_CHAN + 1 + 32, 25);
+place_and_gate(22, 24, 20);
+place_and_gate(23, 25, 21);
+
+// feed bus pins into inputs
+place_buffer(20, I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET);
+place_buffer(20, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+place_buffer(21, I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET);
+place_buffer(21, I2C_SLAVE_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);

@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<user creator="ASH WARE, Inc." version="2.72.2.0">
+  <source_code_search />
+  <app_dimensions x="1966" y="115" w="3033" h="1840" />
+  <splitter name="projectBtmSplitter" distance="1100" total="1726" orientation="horizontal" />
+  <splitter name="projectRhtSplitter" parent="projectBtmSplitter" order="1" distance="510" total="3017" orientation="vertical" />
+  <splitter name="editSplitter" parent="projectRhtSplitter" order="2" distance="1237" total="2503" orientation="vertical" />
+  <splitter name="outputSplitter" parent="projectBtmSplitter" order="2" distance="1877" total="3017" orientation="vertical" />
+  <line_info_mgr />
+  <TabPage type="LogicAnalyzer" ctrl="output1TabControl" sel="true">
+    <ScopeSettings selected_channel="1" selected_cursor="0" auto_scroll="False" first_chan="0" width="125" />
+    <ScopeTimes>
+      <LeftSide word_a="0" word_b="0" word_c="0" />
+      <Width word_a="0" word_b="2117" word_c="1687127593" />
+      <LeftCursor word_a="0" word_b="0" word_c="0" />
+      <RightCursor word_a="0" word_b="2053" word_c="985249895" />
+    </ScopeTimes>
+    <ClocksTimeOptions />
+    <TimeDisplayOptions />
+    <ThreadGroups>
+      <Host index="0" group_a="0" group_b="0" group_c="0" group_d="0" group_e="0" group_f="0" group_g="0" group_h="0" />
+      <eTPU_A index="1" group_a="4294967295" group_b="1" group_c="2" group_d="8" group_e="16" group_f="32" group_g="64" group_h="128" />
+    </ThreadGroups>
+    <ScopeChannels>
+      <ScopeChan index="0" name="_ch21.in" alias="SDA_BUS" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="1" name="_ch20.in" alias="SCL_BUS" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="2" name="_ch0.out" alias="SCL_out_master" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="3" name="_ch1.in" alias="SCL_in_master" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="4" name="_ch2.out" alias="SDA_out_master" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="5" name="_ch3.in" alias="SDA_in_master" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="6" name="_ThreadsIdle" alias="_ThreadsIdle" target_index="1" height="31" />
+      <ScopeChan index="7" name="_ch10.in" alias="SCL_in_slave" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="8" name="_ch11.out" alias="SCL_out_slave" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="9" name="_ch12.in" alias="SDA_in_slave" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="10" name="_ch13.out" alias="SDA_out_slave" target_index="1" vector_override="true" height="31" chan_state_mask="255" snap_chan_flags="true" />
+      <ScopeChan index="12" name="_ch14.out" alias="SCL_out_vtarg" target_index="1" vector_override="true" height="31" chan_state_mask="255" />
+      <ScopeChan index="13" name="_ch15.out" alias="SDA_out_vtarg" target_index="1" vector_override="true" height="31" chan_state_mask="255" />
+    </ScopeChannels>
+  </TabPage>
+  <TabPage type="Breakpoint" is_closed="true" ctrl="projectTabControl" />
+  <TabPage type="TraceBuf" is_closed="true" ctrl="output2TabControl">
+    <Host />
+    <eTPU_A />
+  </TabPage>
+  <TabPage type="Watch" is_closed="true" ctrl="projectTabControl">
+    <Columns />
+    <SymbolList />
+  </TabPage>
+  <TabPage type="Source" ctrl="edit1TabControl" file="main_master_slave.c" top_line="40" sel="true" focus="true" start_pos="1037" len="0" sel_text="" />
+  <TabPage type="Source" ctrl="edit1TabControl" file="..\..\etpu_gct.c" top_line="400" start_pos="15807" len="0" sel_text="" />
+  <TabPage type="Vector" ctrl="edit1TabControl" file="I2C_master_slave.Vector" top_line="0" start_pos="554" len="0" sel_text="" />
+  <TabPage type="Source" ctrl="edit1TabControl" file="..\..\etpu\i2c\etpu_i2c_slave.c" top_line="254" start_pos="11420" len="0" sel_text="" />
+  <TabPage type="Source" ctrl="edit1TabControl" file="..\..\etpu\_etpu_set\etec_i2c_slave.c" top_line="207" start_pos="6138" len="0" sel_text="" />
+  <TabPage type="Source" ctrl="edit1TabControl" file="..\..\etpu\_utils\etpu_util_ext.c" top_line="26" start_pos="3582" len="0" sel_text="" />
+  <TabPage type="Text" ctrl="edit2TabControl" file="ReadMe.txt" top_line="0" sel="true" start_pos="0" len="0" sel_text="" />
+  <TabPage type="Output" ctrl="output1TabControl" />
+  <TabPage type="ChannelFrame" ctrl="output2TabControl" sel="true" target="1" channel="0">
+    <Columns />
+  </TabPage>
+  <TabPage type="Project" ctrl="projectTabControl" file="ProjMasterSlave.FullSysIdeProj" sel="true" />
+  <selected_project_node name="Link: I2C_master_slave_sim.coff" />
+  <!--Saved last-used directories-->
+  <last_dir type="Text" dir="..\..\" />
+  <last_dir type="Html" dir="..\..\" />
+  <search_dialog scripts="true">
+    <find val="ETPU_I2C_SLAVE_STOP_FAILED" />
+    <replace val="ETPU_I2C_SLAVE_STOP_FAILED" />
+    <directory val="C:\GIT\I2C-eTPU\tests\system\" />
+    <directory val="C:\ASHWARE\MtdtCode\Mtdt_trunk1\Mtdt\TestsHigh\I2C\Tests\System\" />
+    <directory val="C:\Mtdt\TestsHigh\I2C\Tests\System\" />
+    <file_types val="*.c,*.h" />
+    <file_types val="*.ETpuCommand" />
+    <file_types val="*.Vector" />
+  </search_dialog>
+  <workshops enabled="True" active_index="2" />
+  <ide_is_setting>
+    <ALERT_ON_BAD_U32_ADDR_SCRIPT val="True" />
+    <ETPU_ALERT_ON_SET_MRLE_WITH_MRL_SET val="False" />
+    <ETPU_ALERT_ON_MAC_SAMPLE_FLAGS val="False" />
+  </ide_is_setting>
+  <step_asm_multiple val="10" />
+  <step_angle_teeth_multiple val="3" />
+  <is_goto_abs_angle val="false" />
+  <goto_absolute_angle cycles="1" degrees="2" hundredths="3" />
+  <goto_delta_angle cycles="4" degrees="5" hundredths="6" />
+  <goto_absolute_time ks="0" sec="0" ms="13" us="650" ns="870" />
+  <goto_delta_time ks="0" sec="0" ms="0" us="10" ns="0" />
+  <is_goto_abs_time val="false" />
+  <goto_line_num val="10" />
+  <make_node target="Host" file="obj\main_master_slave.o" time="5249034564251710613">
+    <dependent_file file="main_master_slave.c" time="5249034546349907084" />
+    <dependent_file file="..\..\..\ASHWARE\Builds\Include\isrLib.h" time="5248851424849560878" />
+    <dependent_file file="..\..\..\ASHWARE\Builds\Include\ScriptLib.h" time="5248851424849590795" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\etpu_gct.h" time="5249034337140835851" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c.h" time="5249034504102306606" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_master.h" time="5249034416618447482" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_slave.h" time="5249034480904654819" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="obj\etpu_gct.o" time="5249034564255827155">
+    <dependent_file file="..\..\etpu_gct.c" time="5249034504790433547" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu_gct.h" time="5249034337140835851" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set.h" time="5249026799326115109" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_defines.h" time="5249034505621253425" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_scm.h" time="5249034505621273371" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_idata.h" time="5249034505621233456" />
+    <dependent_file file="..\..\include\mpc5554_vars.h" time="5249033740167574831" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c.h" time="5249034504102306606" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_master.h" time="5249034416618447482" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_slave.h" time="5249034480904654819" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="obj\etpu_util_ext.o" time="5249034564260126928">
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.c" time="5249013546457607209" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="obj\etpu_i2c.o" time="5249034564264100382">
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c.c" time="5249034505326101315" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c.h" time="5249034504102306606" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="obj\etpu_i2c_master.o" time="5249034564268325685">
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_master.c" time="5249034435267531316" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_master.h" time="5249034416618447482" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_defines.h" time="5249034505621253425" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="obj\etpu_i2c_slave.o" time="5249034564272461716">
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_slave.c" time="5249034519029131413" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util_ext.h" time="5249034564248132495" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_utils\etpu_util.h" time="5249034347257722527" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\include\etpu_struct.h" time="5246171774507387904" />
+    <dependent_file file="..\..\etpu\i2c\etpu_i2c_slave.h" time="5249034480904654819" />
+    <dependent_file file="..\..\include\typedefs.h" time="5244979414647387904" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_set_defines.h" time="5249034505621253425" />
+    <dependent_file file="ProjMasterSlave.FullSysIdeProj" time="5249034551720860645" />
+  </make_node>
+  <make_node target="Host" file="ScriptCpu.Cpu32Command" time="5249034562900299968">
+    <dependent_file file="ScriptCpu.Cpu32Command" time="5249034562900299968" />
+  </make_node>
+  <make_node target="eTPU_A" file="ScriptMasterSlave.ETpuCommand" time="5249034537444870176">
+    <dependent_file file="ScriptMasterSlave.ETpuCommand" time="5249034537444870176" />
+    <dependent_file file="..\..\etpu\_etpu_set\etpu_i2c_common.h" time="5249034305942732977" />
+  </make_node>
+  <make_node target="eTPU_A" file="I2C_master_slave.Vector" time="5249034561821068575">
+    <dependent_file file="I2C_master_slave.Vector" time="5249034561821068575" />
+  </make_node>
+  <source_file name="..\..\Cpu\SimBuild\makefile.gnu" tool="None" />
+  <source_file name="ReadMe.txt" tool="None" />
+  <!--=======================================================-->
+  <!--======    START TARGET-SPECIFIC SETTINGS        =======-->
+  <target name="Host" />
+  <!--======    END TARGET-SPECIFIC SETTINGS          =======-->
+  <!--=======================================================-->
+  <!--=======================================================-->
+  <!--======    START TARGET-SPECIFIC SETTINGS        =======-->
+  <target name="eTPU_A" />
+  <!--======    END TARGET-SPECIFIC SETTINGS          =======-->
+  <!--=======================================================-->
+</user>

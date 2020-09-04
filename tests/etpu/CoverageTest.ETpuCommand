@@ -1,0 +1,32 @@
+load_cumulative_file_coverage("etec_i2c_master.c", "WriteTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "ReadTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "ReadTestCoverage_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "CombinedTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "TimingTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "MultiSlaveTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "AddressTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "ClockStretchTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "MasterErrorTest_master.CoverageData");
+load_cumulative_file_coverage("etec_i2c_master.c", "SlaveErrorTest_master.CoverageData");
+verify_file_coverage_ex("etec_i2c_master.c", 100, 100, 0);
+
+load_cumulative_file_coverage("etec_i2c_slave.c", "WriteTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "ReadTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "ReadTestCoverage_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "CombinedTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "TimingTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "MultiSlaveTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "AddressTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "ClockStretchTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "MasterErrorTest_slave.CoverageData");
+load_cumulative_file_coverage("etec_i2c_slave.c", "SlaveErrorTest_slave.CoverageData");
+verify_file_coverage_ex("etec_i2c_slave.c", 100, 100.0, 0);
+
+write_coverage_file("I2C_coverage_stats.Coverage");
+
+#ifdef _ASH_WARE_AUTO_RUN_
+wait_time(5000);
+exit();
+#else
+print("All tests are done!!");
+#endif // _ASH_WARE_AUTO_RUN_

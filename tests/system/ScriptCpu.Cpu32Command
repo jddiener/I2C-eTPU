@@ -1,0 +1,24 @@
+// Copyright 1999-2020, ASH WARE Inc.  All rights reserved.
+
+// Primary script file  'ScriptCpu.Cpu32Command'
+
+// Set the host clock to 1000 Mhz (1 ns/clock -->1e6 FemtoSeconds/clock)
+set_clk_period(1000000);
+
+
+// wait for test to complete
+wait_time(8500);
+
+// verify valid completion
+verify_val("g_complete_flag", "==", "1");
+
+wait_time(100);
+
+//=============================================================================
+//==========      That is all she wrote!!
+
+#ifdef _ASH_WARE_AUTO_RUN_
+exit();
+#else
+print("All tests are done (CPU32)!!");
+#endif // _ASH_WARE_AUTO_RUN_

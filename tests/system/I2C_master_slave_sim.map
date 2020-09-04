@@ -1,0 +1,311 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+g_p_i2c_slave1_read_buf
+                    0x4               obj\main_master_slave.o
+fs_etpu_free_param  0x4               obj\etpu_gct.o
+g_scriptFailFlag    0x4               C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+isrParam2TableAddr  0x4               C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+isrParam1Table      0x400             C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+isrParam1TableAddr  0x4               C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+g_p_i2c_master_buf1
+                    0x4               obj\main_master_slave.o
+fs_etpu_c_free_param
+                    0x4               obj\etpu_gct.o
+isrAddrTable        0x400             C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+g_p_i2c_master_cmd_buf
+                    0x4               obj\main_master_slave.o
+isrAddrTableAddr    0x4               C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+g_backDoorBuf       0x80              C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+userVecTable        0x400             C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+g_p_i2c_slave1_write_buf
+                    0x4               obj\main_master_slave.o
+g_p_i2c_master_buf2
+                    0x4               obj\main_master_slave.o
+g_p_i2c_master_buf3
+                    0x4               obj\main_master_slave.o
+g_i2c_error_flags   0x2               obj\main_master_slave.o
+isrParam2Table      0x400             C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+g_p_i2c_master_buf4
+                    0x4               obj\main_master_slave.o
+g_p_i2c_slave2_read_buf
+                    0x4               obj\main_master_slave.o
+g_p_i2c_slave2_write_buf
+                    0x4               obj\main_master_slave.o
+isrFirstVecNum      0x4               C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ram1             0x00000000         0x00000400         xrw
+ram2             0x00000400         0x0001fc00         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+LOAD obj\main_master_slave.o
+LOAD obj\etpu_gct.o
+LOAD obj\etpu_util_ext.o
+LOAD obj\etpu_i2c.o
+LOAD obj\etpu_i2c_master.o
+LOAD obj\etpu_i2c_slave.o
+LOAD C:\Program Files (x86)\ASH WARE\GenericHostTools\V1_00A\gcc-m68k-ashware\lib\gcc-lib\m68k-coff\egcs-2.91.66\mcpu32/libgcc.a
+LOAD C:\Program Files (x86)\ASH WARE\GenericHostTools\V1_00A\gcc-m68k-ashware\lib\gcc-lib\m68k-coff\egcs-2.91.66\mcpu32/libgcc.a
+START GROUP
+LOAD C:\Program Files (x86)\ASH WARE\GenericHostTools\V1_00A\gcc-m68k-ashware\m68k-coff\lib\mcpu32/libc.a
+END GROUP
+START GROUP
+LOAD C:\Program Files (x86)\ASH WARE\GenericHostTools\V1_00A\gcc-m68k-ashware\m68k-coff\lib\mcpu32/libbcc.a
+END GROUP
+                0x0001fbf8                PROVIDE (__stack, 0x1fbf8)
+
+.vecs           0x00000000      0x100
+ *(.vectors)
+ .vectors       0x00000000      0x100 C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+
+.reset          0x00000400       0x48
+ *(.reset)
+ .reset         0x00000400       0x48 C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+                0x0000042c                endloop
+                0x0000042e                SimBackDoor
+                0x00000400                start
+                0x0001fff8                __stack=0x1fbf8
+
+.text           0x00000448     0x4d94
+ *(.text)
+ .text          0x00000448      0x764 C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+                0x00000774                print
+                0x00000830                set_voltage
+                0x00000498                isrSetVecBase
+                0x00000af6                verify_mem_u32
+                0x00000688                at_time
+                0x000008a2                verify_current
+                0x000006e6                read_time
+                0x000004b2                isrLibInit
+                0x000007f0                set_angle_indices
+                0x00000b92                InternalErrorLoop
+                0x00000a82                verify_mem_u16
+                0x0000048c                defaultIsr
+                0x00000632                wait_time
+                0x000009d8                write_tcrclk_pin
+                0x00000b42                SetBackdoorScriptHeaderAndDo
+                0x000007aa                place_buffer
+                0x00000558                isrConnect
+                0x00000746                print_to_trace
+                0x00000a0e                verify_mem_u8
+                0x00000946                write_chan_input_pin
+                0x00000600                set_clk_period
+                0x00000992                verify_chan_output_pin
+ .text          0x00000bac      0x626 obj\main_master_slave.o
+                0x00000d4a                aw_etpu_i2c_slave_wait_for_data_request_int
+                0x00000bac                aw_etpu_i2c_master_wait_for_done_int
+                0x00000c86                aw_etpu_i2c_slave_wait_for_done_int
+                0x00000de0                user_main
+ *fill*         0x000011d2        0x2
+ .text          0x000011d4      0x2cc obj\etpu_gct.o
+                0x0000120c                etpu_b_tcr2_freq
+                0x000011e4                fs_etpu_data_ram_end
+                0x000011d8                eTPU
+                0x000011e8                fs_etpu_data_ram_ext
+                0x000011e0                fs_etpu_data_ram_start
+                0x00001214                etpu_c_tcr2_freq
+                0x000011f8                fs_etpu_c_data_ram_end
+                0x00001208                etpu_b_tcr1_freq
+                0x000011f4                fs_etpu_c_data_ram_start
+                0x000011fc                fs_etpu_c_data_ram_ext
+                0x000011f0                fs_etpu_c_code_start
+                0x000011d4                eTPU_AB
+                0x000011ec                eTPU_C
+                0x0000148e                my_system_etpu_start
+                0x000011dc                fs_etpu_code_start
+                0x00001210                etpu_c_tcr1_freq
+                0x00001204                etpu_a_tcr2_freq
+                0x00001200                etpu_a_tcr1_freq
+                0x00001218                my_system_etpu_init
+ .text          0x000014a0     0x2086 obj\etpu_util_ext.o
+                0x00002dda                fs_etpu_get_idle_cnt_a_ext
+                0x000016ce                fs_etpu2_init_ext
+                0x000021c2                fs_etpu_get_chan_local_32_ext
+                0x000023e0                fs_etpu_get_chan_local_8_ext
+                0x0000269c                fs_memcpy32_ext
+                0x000024ba                fs_etpu_set_global_16_ext
+                0x0000213a                fs_etpu_set_chan_local_8_ext
+                0x000024fe                fs_etpu_set_global_8_ext
+                0x000020b2                fs_etpu_set_chan_local_16_ext
+                0x00002d9a                fs_etpu_get_global_error_ext
+                0x00002c9a                fs_etpu_clear_chan_dma_oveflow_flag_ext
+                0x00003088                fs_etpu_coherent_read_32_ext
+                0x00002586                fs_etpu_get_global_24s_ext
+                0x00001e2e                fs_etpu_malloc_ext
+                0x00001bfe                fs_etpu_disable_ext
+                0x0000280a                fs_etpu_set_output_disable_mask_a_ext
+                0x0000202e                fs_etpu_set_chan_local_24_ext
+                0x000019b6                fs_etpu_get_cpba_ext
+                0x00001d24                fs_etpu_dma_enable_ext
+                0x000024a0                fs_etpu_set_global_24_ext
+                0x00002ea4                fs_etpu_clear_idle_cnt_b_ext
+                0x00003212                fs_etpu_coherent_write_24_ext
+                0x00002d10                fs_etpu_get_global_exceptions_ext
+                0x00002ae2                fs_etpu_clear_chan_interrupt_overflow_flag_ext
+                0x00001fae                fs_etpu_set_chan_local_32_ext
+                0x00002722                fs_etpu_set_interrupt_mask_a_ext
+                0x00002464                fs_etpu_set_global_32_ext
+                0x00001ab6                fs_etpu_set_hsr_ext
+                0x00001cc2                fs_etpu_interrupt_disable_ext
+                0x0000235c                fs_etpu_get_chan_local_16_ext
+                0x00002d58                fs_etpu_clear_global_exceptions_ext
+                0x00001de8                fs_timer_start_ext
+                0x00002c30                fs_etpu_get_chan_dma_oveflow_flag_ext
+                0x000014a0                fs_etpu_init_ext
+                0x0000265c                fs_etpu_get_global_8_ext
+                0x00002a02                fs_etpu_clear_chan_interrupt_flag_ext
+                0x000029a0                fs_etpu_get_chan_interrupt_flag_ext
+                0x00001c60                fs_etpu_interrupt_enable_ext
+                0x00002542                fs_etpu_get_global_32_ext
+                0x00002e5e                fs_etpu_clear_idle_cnt_a_ext
+                0x000026ec                fs_memset32_ext
+                0x00001d86                fs_etpu_dma_disable_ext
+                0x00001a36                fs_etpu_get_cpba_pse_ext
+                0x0000275c                fs_etpu_set_interrupt_mask_b_ext
+                0x00002b58                fs_etpu_get_chan_dma_flag_ext
+                0x000027d0                fs_etpu_set_dma_mask_b_ext
+                0x000033a0                fs_etpu_coherent_write_32_ext
+                0x00002246                fs_etpu_get_chan_local_24s_ext
+                0x00002a78                fs_etpu_get_chan_interrupt_oveflow_flag_ext
+                0x00001b82                fs_etpu_enable_ext
+                0x00001b1e                fs_etpu_get_hsr_ext
+                0x00002bba                fs_etpu_clear_chan_dma_flag_ext
+                0x000028d4                fs_etpu_set_output_disable_mask_b_ext
+                0x00002796                fs_etpu_set_dma_mask_a_ext
+                0x00001ec2                fs_etpu_malloc2_ext
+                0x00001890                fs_etpu_chan_init_ext
+                0x00002e1c                fs_etpu_get_idle_cnt_b_ext
+                0x000022ce                fs_etpu_get_chan_local_24_ext
+                0x00002eea                fs_etpu_coherent_read_24_ext
+                0x0000261c                fs_etpu_get_global_16_ext
+                0x000025ce                fs_etpu_get_global_24_ext
+ *fill*         0x00003526        0x2
+ .text          0x00003528      0x2ea obj\etpu_i2c.o
+                0x00003528                aw_etpu_i2c_allocate_buffer
+                0x00003564                aw_etpu_i2c_shutdown
+ *fill*         0x00003812        0x2
+ .text          0x00003814      0xeb2 obj\etpu_i2c_master.o
+                0x0000466e                aw_etpu_i2c_master_clear_latched_error_flags
+                0x000040fa                aw_etpu_i2c_master_receive
+                0x00004608                aw_etpu_i2c_master_get_latched_error_flags
+                0x00003d94                aw_etpu_i2c_master_set_timing
+                0x000045b0                aw_etpu_i2c_master_clear_running_error_flags
+                0x000044d0                aw_etpu_i2c_master_latch_clear_error_flags
+                0x000043c8                aw_etpu_i2c_master_raw_transfer
+                0x00003fba                aw_etpu_i2c_master_transmit
+                0x00004240                aw_etpu_i2c_master_combined_transfer
+                0x00003814                aw_etpu_i2c_master_init
+                0x0000454a                aw_etpu_i2c_master_get_running_error_flags
+ *fill*         0x000046c6        0x2
+ .text          0x000046c8      0xaf4 obj\etpu_i2c_slave.o
+                0x00004d5c                aw_etpu_i2c_slave_set_write_buffer
+                0x00005040                aw_etpu_i2c_slave_get_running_error_flags
+                0x00004c60                aw_etpu_i2c_slave_set_read_buffer
+                0x00005164                aw_etpu_i2c_slave_clear_latched_error_flags
+                0x00004dde                aw_etpu_i2c_slave_get_transfer_status
+                0x00004ce2                aw_etpu_i2c_slave_issue_data_ready
+                0x000046c8                aw_etpu_i2c_slave_init
+                0x000050a6                aw_etpu_i2c_slave_clear_running_error_flags
+                0x00004e90                aw_etpu_i2c_slave_get_write_data
+                0x00004fca                aw_etpu_i2c_slave_latch_clear_error_flags
+                0x000050fe                aw_etpu_i2c_slave_get_latched_error_flags
+                0x000051bc                .=ALIGN(0x4)
+                0x000051bc                __CTOR_LIST__=.
+                0x000051bc                ___CTOR_LIST__=.
+                0x000051bc        0x4 LONG 0x0 (((__CTOR_END__-__CTOR_LIST__)/0x4)-0x2)
+ *(.ctors)
+                0x000051c0        0x4 LONG 0x0
+                0x000051c4                __CTOR_END__=.
+                0x000051c4                __DTOR_LIST__=.
+                0x000051c4                ___DTOR_LIST__=.
+                0x000051c4        0x4 LONG 0x0 (((__DTOR_END__-__DTOR_LIST__)/0x4)-0x2)
+ *(.dtors)
+                0x000051c8        0x4 LONG 0x0
+                0x000051cc                __DTOR_END__=.
+ *(.rodata)
+ *(.gcc_except_table)
+                0x000051cc                __INIT_SECTION__=.
+                0x000051cc        0x4 LONG 0x4e560000
+ *(.init)
+                0x000051d0        0x2 SHORT 0x4e5e
+                0x000051d2        0x2 SHORT 0x4e75
+                0x000051d4                __FINI_SECTION__=.
+                0x000051d4        0x4 LONG 0x4e560000
+ *(.fini)
+                0x000051d8        0x2 SHORT 0x4e5e
+                0x000051da        0x2 SHORT 0x4e75
+                0x000051dc                _etext=.
+ *(.lit)
+
+.data           0x000051dc     0x18cc
+ *(.shdata)
+ *(.data)
+ .data          0x000051dc        0x4 C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+                0x000051dc                vecTableBaseAddr
+ .data          0x000051e0        0x4 obj\main_master_slave.o
+                0x000051e0                g_complete_flag
+ .data          0x000051e4     0x18c2 obj\etpu_gct.o
+                0x00006a4a                i2c_slave1_instance
+                0x00006a58                i2c_slave1_config
+                0x000069e4                etpu_globals
+                0x000051e4                etpu_code
+                0x00006a86                i2c_slave2_config
+                0x00006a18                i2c_master_instance
+                0x00006a78                i2c_slave2_instance
+                0x00006a26                i2c_master_config
+                0x000069ec                my_etpu_config
+ *fill*         0x00006aa6        0x2
+                0x00006aa8                _edata=.
+
+.bss            0x00006aa8     0x10c4
+                0x00006aa8                .=ALIGN(0x4)
+                0x00006aa8                __bss_start=.
+ *(.shbss)
+ *(.bss)
+ *(COMMON)
+ COMMON         0x00006aa8     0x1094 C:\GIT\ASHWARE\Builds\Lib\libcpu32.o
+                0x00006aa8                g_scriptFailFlag
+                0x00006aac                isrParam2TableAddr
+                0x00006ab0                isrParam1Table
+                0x00006eb0                isrParam1TableAddr
+                0x00006eb4                isrAddrTable
+                0x000072b4                isrAddrTableAddr
+                0x000072b8                g_backDoorBuf
+                0x00007338                userVecTable
+                0x00007738                isrParam2Table
+                0x00007b38                isrFirstVecNum
+ COMMON         0x00007b3c       0x28 obj\main_master_slave.o
+                0x00007b3c                g_p_i2c_slave1_read_buf
+                0x00007b40                g_p_i2c_master_buf1
+                0x00007b44                g_p_i2c_master_cmd_buf
+                0x00007b48                g_p_i2c_slave1_write_buf
+                0x00007b4c                g_p_i2c_master_buf2
+                0x00007b50                g_p_i2c_master_buf3
+                0x00007b54                g_i2c_error_flags
+                0x00007b58                g_p_i2c_master_buf4
+                0x00007b5c                g_p_i2c_slave2_read_buf
+                0x00007b60                g_p_i2c_slave2_write_buf
+ COMMON         0x00007b64        0x8 obj\etpu_gct.o
+                0x00007b64                fs_etpu_free_param
+                0x00007b68                fs_etpu_c_free_param
+                0x00007b70                __bss_end=ALIGN(0x8)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.heap           0x00007b6c        0x0
+                0x00007b6c                __heap_start__=.
+                0x00007b6c                end=__heap_start__
+                0x00007b6c                _end=end
+                0x00007b6c                __end=end
+OUTPUT(I2C_master_slave_sim.coff coff-m68k)

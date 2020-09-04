@@ -1,0 +1,30 @@
+// I2C vector file
+
+// set base wave frequency to 1 MHz
+frequency 1
+
+// I2C channels
+
+// master
+node SCL_out_master		ch2.out
+node SCL_in_master		ch3.in
+node SDA_out_master		ch4.out
+node SDA_in_master		ch5.in
+
+// slave 1
+node SCL_in_slave		ch10.in
+node SCL_out_slave		ch11.out
+node SDA_in_slave		ch12.in
+node SDA_out_slave		ch13.out
+// slave 2
+node SCL_in_slave_2		ch16.in
+node SCL_out_slave_2		ch17.out
+node SDA_in_slave_2		ch18.in
+node SDA_out_slave_2		ch19.out
+
+// BUS LINES
+node SCL_BUS	ch20.in
+node SDA_BUS	ch21.in
+
+state L 0
+state H 1

@@ -1,0 +1,149 @@
+Memory Configuration
+
+Name                Origin    Length      Attributes
+SCM                 0x0000    0x1800      x--
+SDM                 0x0000    0x0400      -rw
+
+
+.entry (SCM)
+
+                    Origin    Length (byte,word)  Name
+etpu_func_00        0x0000    0x0040,   64        I2C_SCL_out (etec_i2c_master.c)
+etpu_func_01        0x0040    0x0040,   64        I2C_SCL_in (etec_i2c_master.c)
+etpu_func_02        0x0080    0x0040,   64        I2C_SDA_out (etec_i2c_master.c)
+etpu_func_03        0x00c0    0x0040,   64        I2C_SDA_in (etec_i2c_master.c)
+etpu_func_04        0x0100    0x0040,   64        I2C_SCL_in (etec_i2c_slave.c)
+etpu_func_05        0x0140    0x0040,   64        I2C_SCL_out (etec_i2c_slave.c)
+etpu_func_06        0x0180    0x0040,   64        I2C_SDA_in (etec_i2c_slave.c)
+etpu_func_07        0x01c0    0x0040,   64        I2C_SDA_out (etec_i2c_slave.c)
+
+
+.text (SCM)
+
+                    Origin    Length (byte,word)  Name
+                    0x0800    0x0478,  286        obj\etec_i2c_master.eao
+etpu_thread         0x0800    0x0010,    4            InitSCL_out
+etpu_thread         0x0810    0x0010,    4            InitSCL_in
+etpu_thread         0x0820    0x0010,    4            InitSDA_out
+etpu_thread         0x0830    0x0010,    4            InitSDA_in
+etpu_thread         0x0840    0x0008,    2            Shutdown
+etpu_thread         0x0848    0x000c,    3            LatchAndClearErrorFlags
+etpu_thread         0x0854    0x00a4,   41            StartTransfer
+etpu_thread         0x08f8    0x00ec,   59            PulseClock
+etpu_thread         0x09e4    0x0024,    9            PulseClockIgnore
+etpu_thread         0x0a08    0x00a0,   40            ProcessAck
+etpu_thread         0x0aa8    0x0158,   86            ProcessAck_Step2
+etpu_thread         0x0c00    0x0004,    1            ProcessAckIgnore
+etpu_thread         0x0c04    0x0030,   12            BeginStop
+etpu_thread         0x0c34    0x0008,    2            FinishStop
+etpu_thread         0x0c3c    0x0038,   14            FinishRepeatedStart
+etpu_thread         0x0c74    0x0004,    1            FinishRepeatedStartIgnore
+                    0x0c78    0x0508,  322        obj\etec_i2c_slave.eao
+etpu_thread         0x0c78    0x0018,    6            InitSCL_in
+etpu_thread         0x0c90    0x0010,    4            InitSCL_out
+etpu_thread         0x0ca0    0x0018,    6            InitSDA_in
+etpu_thread         0x0cb8    0x0010,    4            InitSDA_out
+etpu_thread         0x0cc8    0x0008,    2            Shutdown
+etpu_thread         0x0cd0    0x0048,   18            ReadDataReady
+etpu_thread         0x0d18    0x000c,    3            LatchAndClearErrorFlags
+etpu_thread         0x0d24    0x000c,    3            IdleDetectPass_SDA
+etpu_thread         0x0d30    0x0008,    2            IdleDetectPass_SCL
+etpu_fragment       0x0d38    0x0028,   10            IdleDetectPass
+etpu_thread         0x0d60    0x0024,    9            IdleDetectFail_SDA
+etpu_thread         0x0d84    0x0024,    9            IdleDetectFail_SCL
+etpu_thread         0x0da8    0x0020,    8            TransferStart_SDA
+etpu_thread         0x0dc8    0x0040,   16            TransferStart_SCL
+etpu_thread         0x0e08    0x0164,   89            DataBitReady
+etpu_thread         0x0f6c    0x0084,   33            OutputDataBit
+etpu_thread         0x0ff0    0x0128,   74            HandleAck
+etpu_thread         0x1118    0x0034,   13            FoundStop
+etpu_thread         0x114c    0x0034,   13            FoundRepeatedStart
+                    0x1180    0x0074,   29        C:\Program Files (x86)\ASH WARE\eTPU Compiler V2_62D\Lib\_global_error_handler.lib
+label               0x1180                                _Error_handler_unexpected_thread
+label               0x118c                                _Error_handler_entry
+label               0x1198                                _Error_handler_scm_off_weeds
+label               0x11a4                                _Error_handler_fill_weeds
+label               0x11b0                                _Error_handler_save_states
+label               0x11bc                                _Error_handler_LinkNotSet
+label               0x11c4                                _Error_handler_Tdl_B_NotSet
+label               0x11cc                                _Error_handler_Tdl_A_NotSet
+label               0x11d4                                _Error_handler_Mrl_B_NotSet
+label               0x11dc                                _Error_handler_Mrl_A_NotSet
+label               0x11e4                                _Error_handler_InputPinNotSet
+label               0x11ec                                _Error_handler_OutputPinNotSet
+
+
+SCM Segment Summary
+                    Origin    Length (bytes,words)
+.entry              0x0000    0x0200,  128
+.text               0x0800    0x09f4,  637
+Total SCM Used = 0x0bf4 bytes
+
+
+.data (SDM)
+
+                    Origin    Size      Scope             Name
+                    0x0000    0x0000                      obj\etec_i2c_master.eao
+                    0x0000    0x0000                      obj\etec_i2c_slave.eao
+                    0x0000    0x0004                      C:\Program Files (x86)\ASH WARE\eTPU Compiler V2_62D\Lib\_global_error_handler.lib
+sint32              0x0000    0x0004                          _Global_error_data
+
+
+SDM Segment Summary
+                    Origin    Size
+.data               0x0000    0x0004
+Total Global SDM Used = 0x0004 bytes (not including any located data)
+
+
+Channel Frame Address Space Segments (one per eTPU Function / Class)
+
+                    Origin    Size      Scope             Name
+                                                          obj\etec_i2c_master.eao
+                    0x0000    0x0040                          I2C_master (.chanframe_I2C_master)
+uint24              0x0001    0x0003                              _working_bit_count
+uint24              0x0005    0x0003                              _working_byte
+uint8               0x0000    0x0001                              _read_write_flag
+uint24              0x0009    0x0003                              _pulse_edge_next_timestamp
+pointer             0x000d    0x0003                              _p_current_cmd
+uint8               0x0004    0x0001                              _cmd_sent_cnt
+uint24              0x0011    0x0003                              _remaining_byte_count
+pointer             0x0015    0x0003                              _p_working_buf
+uint24              0x0019    0x0003                              _working_buf_size
+uint8               0x0008    0x0001                              _working_buf_read_write_flag
+uint24              0x001d    0x0003                              _start_flag
+uint24              0x0021    0x0003                              _tLOW
+uint24              0x0025    0x0003                              _tHIGH
+uint24              0x0029    0x0003                              _tBUF
+uint24              0x002d    0x0003                              _tSU_STA
+uint24              0x0031    0x0003                              _tSU_STO
+uint24              0x0035    0x0003                              _tHD_DAT
+uint24              0x0039    0x0003                              _tr_max
+pointer             0x003d    0x0003                              _p_cmd_list
+uint8               0x000c    0x0001                              _cmd_cnt
+uint8               0x0010    0x0001                              _in_use_flag
+uint8               0x0014    0x0001                              _error_flags
+uint8               0x0018    0x0001                              _latched_error_flags
+                                                          obj\etec_i2c_slave.eao
+                    0x0000    0x0040                          I2C_slave (.chanframe_I2C_slave)
+sint8               0x0000    0x0001                              _state
+uint24              0x0001    0x0003                              _working_byte
+uint24              0x0005    0x0003                              _working_bit_cnt
+uint24              0x0009    0x0003                              _working_byte_cnt
+uint24              0x000d    0x0003                              _read_write_message
+pointer             0x0011    0x0003                              _p_working_buf
+uint24              0x0015    0x0003                              _last_ack
+uint24              0x0019    0x0003                              _idle_detect
+uint8               0x0004    0x0001                              _address
+uint8               0x0008    0x0001                              _address_mask
+uint24              0x001d    0x0003                              _accept_general_call
+uint24              0x0021    0x0003                              _read_buffer_size
+uint24              0x0025    0x0003                              _write_buffer_size
+pointer             0x0029    0x0003                              _read_buffer
+pointer             0x002d    0x0003                              _write_buffer
+uint24              0x0031    0x0003                              _tSU_DAT
+uint24              0x0035    0x0003                              _tBUF
+uint24              0x0039    0x0003                              _header
+uint24              0x003d    0x0003                              _byte_cnt
+uint8               0x000c    0x0001                              _error_flags
+uint8               0x0010    0x0001                              _latched_error_flags
+                                                          C:\Program Files (x86)\ASH WARE\eTPU Compiler V2_62D\Lib\_global_error_handler.lib

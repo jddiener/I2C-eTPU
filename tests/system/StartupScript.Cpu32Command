@@ -1,0 +1,52 @@
+// Copyright 1999, ASH WARE Inc.  All rights reserved.
+
+// This startup script registers to be written prior to CodeLode
+// This allows the memory sub-system to be intitialized such that 
+// the hardware debugger's memory writes during CodeLoad will work
+
+// For Mot-Consulting/ASH WARE Inc.'s Generic 683xx Development Platform
+// the memory sub-system powers up in a write-enabled mode
+// so it need not be initialized prior to CodeLoad
+
+	// Disable that pesky watchdog timer
+	*((U16 *) 0xFFFA20) = 0x0000;
+
+// The period is in femto seconds which is one billionth of a micro-second
+// A simple conversion is to invert the MHz and multiply by a billion
+// E.G.:   1e9/128 = 59601860 femto-seconds.
+set_clk_period(7812500);  // 128 MHZ
+
+// This board defaults to run a debugger out of ROM
+// Override this default by mapping RAM to address 0 and the ROM to address 0x100000
+
+	// ROM to 0x100000
+	*((U16 *) 0xFFFA48) = 0x0E03;  // CSBARBT
+	*((U16 *) 0xFFFA4A) = 0x68B0;  // CSORBT
+
+	// RAM to 0x0, 
+	// CS0
+	*((U16 *) 0xFFFA4C) = 0x0005;  // CSBAR0, addr->0
+	*((U16 *) 0xFFFA4E) = 0x303E;  // CSOR0, lower, write
+	// CS1
+	*((U16 *) 0xFFFA50) = 0x0005;  // CSBAR1, addr->0
+	*((U16 *) 0xFFFA52) = 0x503E;  // CSOR1, upper, write
+	// CS2
+	*((U16 *) 0xFFFA54) = 0x0005;  // CSBAR2, addr->0
+	*((U16 *) 0xFFFA56) = 0x683E;  // CSOR2, both, read
+
+
+// Just for fun, the following scripts verify that the 683xx's
+// Address register 0 and Data register 0 can be read and written.  
+// If this crude test fails a warning will be generated, otherwise nothing
+
+// Test of all DATA registers
+	// Reg A0
+	write_reg32(0x2AAAAAA2,REG_A0);
+	verify_reg32(REG_A0, 0x2AAAAAA2);
+	// verify_reg32(REG_A0, 0x11112222); // This would fail!
+
+// Test of all ADDRESS registers
+	// Reg D0
+	write_reg32(0x44CCCC44,REG_D0);
+	verify_reg32(REG_D0, 0x44CCCC44);
+	// verify_reg32(REG_D0, 0x33334444); // This would fail!
