@@ -211,6 +211,7 @@ public:
 
 	// methods/fragments
 
+    _eTPU_fragment PulseClock_fragment();
 
 	// threads
 

@@ -193,6 +193,10 @@ _eTPU_thread I2C_master::StartTransfer(_eTPU_matches_enabled)
 // entered on SCL_in
 _eTPU_thread I2C_master::PulseClock(_eTPU_matches_enabled)
 {
+    PulseClock_fragment();
+}
+_eTPU_fragment I2C_master::PulseClock_fragment()
+{
 	ClearTransLatch();
 	if (_working_bit_count == 0)
 		SetFlag0(); // go to setup ack mode
@@ -288,7 +292,7 @@ _eTPU_thread I2C_master::PulseClockIgnore(_eTPU_matches_enabled)
 		_start_flag = 0;
 		chan += (ETPU_I2C_MASTER_SCL_IN_OFFSET - ETPU_I2C_MASTER_SCL_OUT_OFFSET);
 		erta = tmp;
-		PulseClock(); // no return
+		PulseClock_fragment(); // no return
 	}
 }
 

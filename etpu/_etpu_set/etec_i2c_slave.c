@@ -151,7 +151,7 @@ _eTPU_thread I2C_slave::ReadDataReady(_eTPU_matches_enabled)
 	ClearMatchALatch();
 	WriteErtAToMatchAAndEnable();
 	chan += (ETPU_I2C_SLAVE_SCL_IN_OFFSET - ETPU_I2C_SLAVE_SCL_OUT_OFFSET);
-	OutputDataBit();
+	OutputDataBit_fragment();
 }
 
 // entered on SCL_in channel, HSR 4
@@ -200,6 +200,10 @@ _eTPU_fragment I2C_slave::IdleDetectPass()
 // flag 1 = 0
 _eTPU_thread I2C_slave::IdleDetectFail_SDA(_eTPU_matches_enabled)
 {
+    IdleDetectFail_SDA_fragment();
+}
+_eTPU_fragment I2C_slave::IdleDetectFail_SDA_fragment()
+{
 	unsigned int24 tmp;
 	ClearMatchALatch();
 	_state = I2C_SLAVE_MODE_FIND_IDLE;
@@ -219,6 +223,10 @@ _eTPU_thread I2C_slave::IdleDetectFail_SDA(_eTPU_matches_enabled)
 // flag 0 = 0
 // flag 1 = 0
 _eTPU_thread I2C_slave::IdleDetectFail_SCL(_eTPU_matches_enabled)
+{
+    IdleDetectFail_SCL_fragment();
+}
+_eTPU_fragment I2C_slave::IdleDetectFail_SCL_fragment()
 {
 	unsigned int24 tmp;
 	ClearMatchALatch();
@@ -247,7 +255,7 @@ _eTPU_thread I2C_slave::TransferStart_SDA(_eTPU_matches_enabled)
 	ClearMatchALatch();
 	chan += (ETPU_I2C_SLAVE_SCL_IN_OFFSET - ETPU_I2C_SLAVE_SDA_IN_OFFSET);
 	if ((CurrentInputPin == 0) || (_state != I2C_SLAVE_MODE_IDLE))
-		IdleDetectFail_SCL(); // no return
+		IdleDetectFail_SCL_fragment(); // no return
 	//_start_timestamp = erta;
 	_state = I2C_SLAVE_MODE_START_SDA_LOW;
 }
@@ -265,7 +273,7 @@ _eTPU_thread I2C_slave::TransferStart_SCL(_eTPU_matches_enabled)
 		if (_state == I2C_SLAVE_MODE_IDLE)
 			// only set invalid start error if in idle mode
 			_error_flags |= ETPU_I2C_SLAVE_INVALID_START;
-		IdleDetectFail_SCL(); // no return
+		IdleDetectFail_SCL_fragment(); // no return
 	}
 	DetectARisingEdge();
 	_last_ack = 0; // clear last ack status
@@ -340,7 +348,7 @@ _eTPU_thread I2C_slave::DataBitReady(_eTPU_matches_enabled)
 				// need to ignore this message; it is destined for some other slave
 				ClrFlag0();
 				// start up IDLE detection
-				IdleDetectFail_SCL(); // no return
+				IdleDetectFail_SCL_fragment(); // no return
 			}
 		}
 		else // _state == I2C_SLAVE_MODE_WRITE_BYTE
@@ -361,6 +369,10 @@ _eTPU_thread I2C_slave::DataBitReady(_eTPU_matches_enabled)
 // flag 1 = 1
 _eTPU_thread I2C_slave::OutputDataBit(_eTPU_matches_enabled)
 {
+    OutputDataBit_fragment();
+}
+_eTPU_fragment I2C_slave::OutputDataBit_fragment()
+{
 	ClearTransLatch();
 	if (_state == I2C_SLAVE_MODE_READ_FIND_STOP)
 	{
@@ -380,7 +392,7 @@ _eTPU_thread I2C_slave::OutputDataBit(_eTPU_matches_enabled)
 		ClrFlag0();
 		SetChannelInterrupt(); // from SCL_in channel
 		// re-start IDLE detection
-		IdleDetectFail_SDA(); // no return
+		IdleDetectFail_SDA_fragment(); // no return
 	}
 	chan += (ETPU_I2C_SLAVE_SDA_OUT_OFFSET - ETPU_I2C_SLAVE_SCL_IN_OFFSET);
 	_working_byte <<= 1;
@@ -467,7 +479,7 @@ _eTPU_thread I2C_slave::HandleAck(_eTPU_matches_enabled)
 					_working_byte = 0x8000; // do not interfere with ACK/NACK from master; just return 0
 					_error_flags |= ETPU_I2C_SLAVE_BUFFER_OVERFLOW; // set error, but keep processing
 				}
-				OutputDataBit(); // no return
+				OutputDataBit_fragment(); // no return
 			}
 		}
 	}
@@ -490,7 +502,7 @@ _eTPU_thread I2C_slave::FoundStop(_eTPU_matches_enabled)
 	if (CurrentInputPin == 0)
 	{
 		_error_flags |= ETPU_I2C_SLAVE_STOP_FAILED;
-		IdleDetectFail_SCL(); // no return
+		IdleDetectFail_SCL_fragment(); // no return
 	}
 	_state = I2C_SLAVE_MODE_IDLE;
 	DetectAFallingEdge();
@@ -514,7 +526,7 @@ _eTPU_thread I2C_slave::FoundRepeatedStart(_eTPU_matches_enabled)
 	if (CurrentInputPin == 0)
 	{
 		_error_flags |= ETPU_I2C_SLAVE_INVALID_START;
-		IdleDetectFail_SCL(); // no return
+		IdleDetectFail_SCL_fragment(); // no return
 	}
 	//_start_timestamp = erta;
 	_state = I2C_SLAVE_MODE_START_SDA_LOW;

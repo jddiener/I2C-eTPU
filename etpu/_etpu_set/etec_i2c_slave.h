@@ -228,6 +228,9 @@ public:
 	// methods/fragments
 
 	_eTPU_fragment IdleDetectPass();
+	_eTPU_fragment OutputDataBit_fragment();
+	_eTPU_fragment IdleDetectFail_SCL_fragment();
+	_eTPU_fragment IdleDetectFail_SDA_fragment();
 
 	// threads
 
