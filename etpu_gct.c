@@ -35,7 +35,11 @@
 #endif
 #include "etpu_util_ext.h"   /* General C Functions for accessing the eTPU, both eTPU-AB and eTPU-C modules simultaneously */
 #include "etpu_set.h"        /* eTPU function set code binary image and other global ddefines */
+#if defined(MPC5777C)
+#include "mpc5777c_vars.h"
+#else
 #include "mpc5554_vars.h"    /* chip-specific configuration - must incldue one of these */
+#endif
 #if 0
 #include "etpu_<func1>.h"  /* eTPU function <func1> API */
 #include "etpu_<func2>.h"  /* eTPU function <func2> API */
@@ -58,8 +62,8 @@ const uint32_t etpu_a_tcr1_freq = 128000000/2;
 const uint32_t etpu_a_tcr2_freq = 128000000/8;
 const uint32_t etpu_b_tcr1_freq = 128000000/2;
 const uint32_t etpu_b_tcr2_freq = 128000000/8;
-const uint32_t etpu_c_tcr1_freq = 0;
-const uint32_t etpu_c_tcr2_freq = 0;
+const uint32_t etpu_c_tcr1_freq = 128000000/2;
+const uint32_t etpu_c_tcr2_freq = 128000000/8;
 
 /*******************************************************************************
  * Global eTPU settings - etpu_config structure
@@ -138,7 +142,8 @@ struct etpu_config_t my_etpu_config =
   _SCM_OFF_OPCODE_,
 };
 
-#if 0 /* eTPU-C module config */
+#if defined(MPC5777C)
+/* eTPU-C module config */
 struct etpu_config_t my_etpu_c_config =
 {
   /* etpu_config.mcr - Module Configuration Register */
@@ -349,7 +354,8 @@ int32_t my_system_etpu_init(void)
 #ifdef FS_ETPU_ARCHITECTURE
  #if FS_ETPU_ARCHITECTURE == ETPU2
   /* Initialization of additional eTPU2-only global settings */
-  err_code = fs_etpu2_init(
+  err_code = fs_etpu2_init_ext(
+    EM_AB,
     &my_etpu_config,
   #ifdef FS_ETPU_ENGINE_MEM_SIZE
     FS_ETPU_ENGINE_MEM_SIZE);
@@ -360,7 +366,8 @@ int32_t my_system_etpu_init(void)
  #endif
 #endif
 
-#if 0 /* eTPU-C module */
+#if defined(MPC5777C)
+/* eTPU-C module */
   /* Initialization of eTPU DATA RAM */
   fs_memset32_ext((uint32_t*)fs_etpu_c_data_ram_start, 0, fs_etpu_c_data_ram_end - fs_etpu_c_data_ram_start);
 
@@ -406,23 +413,23 @@ int32_t my_system_etpu_init(void)
     // initialize I2C channels
     
     // first need to allocate some buffers
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_master_cmd_buf))
+	if (aw_etpu_i2c_allocate_buffer(i2c_master_instance.em, 64, &g_p_i2c_master_cmd_buf))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_master_buf1))
+	if (aw_etpu_i2c_allocate_buffer(i2c_master_instance.em, 64, &g_p_i2c_master_buf1))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_master_buf2))
+	if (aw_etpu_i2c_allocate_buffer(i2c_master_instance.em, 64, &g_p_i2c_master_buf2))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_master_buf3))
+	if (aw_etpu_i2c_allocate_buffer(i2c_master_instance.em, 64, &g_p_i2c_master_buf3))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_master_buf4))
+	if (aw_etpu_i2c_allocate_buffer(i2c_master_instance.em, 64, &g_p_i2c_master_buf4))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_slave1_read_buf))
+	if (aw_etpu_i2c_allocate_buffer(i2c_slave1_instance.em, 64, &g_p_i2c_slave1_read_buf))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_slave1_write_buf))
+	if (aw_etpu_i2c_allocate_buffer(i2c_slave1_instance.em, 64, &g_p_i2c_slave1_write_buf))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_slave2_read_buf))
+	if (aw_etpu_i2c_allocate_buffer(i2c_slave2_instance.em, 64, &g_p_i2c_slave2_read_buf))
 		return FS_ETPU_ERROR_MALLOC;
-	if (aw_etpu_i2c_allocate_buffer(EM_AB, 64, &g_p_i2c_slave2_write_buf))
+	if (aw_etpu_i2c_allocate_buffer(i2c_slave2_instance.em, 64, &g_p_i2c_slave2_write_buf))
 		return FS_ETPU_ERROR_MALLOC;
     // set buffer info into config structures
     i2c_master_config.p_cmd_buffer = g_p_i2c_master_cmd_buf;
@@ -470,7 +477,9 @@ void my_system_etpu_start(void)
 
   /* Synchronous start of all TCR time bases */
   fs_timer_start_ext(EM_AB);
-  /*fs_timer_start_ext(EM_C);*/
+#if defined(MPC5777C)
+  fs_timer_start_ext(EM_C);
+#endif
 }
 
 /*******************************************************************************

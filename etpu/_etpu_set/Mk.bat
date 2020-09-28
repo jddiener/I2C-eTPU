@@ -25,6 +25,9 @@ if  %ERRORLEVEL% NEQ 0 ( goto errors )
 %LINK% obj\etec_i2c_master.eao obj\etec_i2c_slave.eao -out=etpu_set.elf -etba=0x0 -CodeSize=0x1800 -map -lst
 if  %ERRORLEVEL% NEQ 0 ( goto errors )
 
+%LINK% obj\etec_i2c_master.eao obj\etec_i2c_slave.eao -out=etpu_c_set.elf -etba=0x0 -CodeSize=0x1800 -map -GM=C_
+if  %ERRORLEVEL% NEQ 0 ( goto errors )
+
 echo .
 echo BUILD PASSES
 

@@ -3,6 +3,7 @@
 *.eao
 *.elf
 *.o
+*.map
 *.coff
 *.log
 *.CoverageData

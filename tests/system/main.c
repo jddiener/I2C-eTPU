@@ -76,6 +76,16 @@ uint32_t aw_etpu_i2c_slave_wait_for_done_int(struct aw_i2c_slave_instance_t *p_i
     volatile struct eTPU_struct * eTPU;
     uint8_t channel = p_i2c_slave_instance->base_chan_num;
 	uint8_t error_flags;
+
+    if (p_i2c_slave_instance->em == EM_AB)
+    {
+        eTPU = eTPU_AB;
+    }
+    else
+    {
+        eTPU = eTPU_C;
+    }
+
 	while (1)
 	{
 		uint32_t cisr;
@@ -103,6 +113,16 @@ uint32_t aw_etpu_i2c_slave_wait_for_data_request_int(struct aw_i2c_slave_instanc
 {
     volatile struct eTPU_struct * eTPU;
     uint8_t channel = p_i2c_slave_instance->base_chan_num;
+
+    if (p_i2c_slave_instance->em == EM_AB)
+    {
+        eTPU = eTPU_AB;
+    }
+    else
+    {
+        eTPU = eTPU_C;
+    }
+
 	while (1)
 	{
 		uint32_t cisr;
@@ -244,6 +264,21 @@ int user_main()
 	at_time(6000);
 
 	/* test wait for read */
+
+    /* need to switch slave to data wait mode for this test */
+    {
+        volatile struct eTPU_struct * eTPU;
+        if (i2c_slave2_instance.em == EM_AB)
+        {
+            eTPU = eTPU_AB;
+        }
+        else
+        {
+            eTPU = eTPU_C;
+        }
+        eTPU->CHAN[i2c_slave2_instance.base_chan_num + ETPU_I2C_SLAVE_SCL_IN_OFFSET].SCR.R = ETPU_I2C_SLAVE_DATA_WAIT_FM0;
+    }
+
 	aw_etpu_i2c_slave_clear_running_error_flags(&i2c_slave2_instance);
 	((struct aw_etpu_i2c_transfer_cmd*)g_p_i2c_master_cmd_buf)->_header = 0x75;
 	((struct aw_etpu_i2c_transfer_cmd*)g_p_i2c_master_cmd_buf)->_p_buffer = (uint32_t)g_p_i2c_master_buf1 & 0x3fff;

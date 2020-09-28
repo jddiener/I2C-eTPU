@@ -25,7 +25,7 @@ uint32_t fs_etpu_data_ram_ext =   0xC3FCC000;
 volatile struct eTPU_struct * const eTPU_C  = (struct eTPU_struct *)0xFFE00000; 
 uint32_t fs_etpu_c_code_start =     0xFFE10000;
 uint32_t fs_etpu_c_data_ram_start = 0xFFE08000;
-uint32_t fs_etpu_c_data_ram_end =   0xFFE097FC;
+uint32_t fs_etpu_c_data_ram_end =   0xFFE08BFC;
 uint32_t fs_etpu_c_data_ram_ext =   0xFFE0C000;
 
 /*********************************************************************
