@@ -1,0 +1,39 @@
+#include "../etpu/_etpu_set/etpu_i2c_common.h"
+
+// Basic sim/hw test of all 3 terminal types
+// 
+
+// set up pin connections in this script file; rest of testing will be performed
+// in actual host code
+
+#define I2C_MASTER_CHAN		0  /* eTPU-A */
+#define I2C_SLAVE1_CHAN		0  /* eTPU-B */
+#define I2C_SLAVE2_CHAN		0  /* eTPU-C */
+
+// create waveform of SCL & SDA wires
+place_and_gate_ex("eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET + 32, "eTPU_B", I2C_SLAVE1_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET + 32, "eTPU_A", 22);
+place_and_gate_ex("eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET + 32, "eTPU_B", I2C_SLAVE1_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET + 32, "eTPU_A", 23);
+place_and_gate_ex("eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_OUT_OFFSET + 32, "eTPU_C", I2C_SLAVE2_CHAN + ETPU_I2C_SLAVE_SCL_OUT_OFFSET + 32, "eTPU_A", 24);
+place_and_gate_ex("eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_OUT_OFFSET + 32, "eTPU_C", I2C_SLAVE2_CHAN + ETPU_I2C_SLAVE_SDA_OUT_OFFSET + 32, "eTPU_A", 25);
+place_and_gate_ex("eTPU_A", 22, "eTPU_A", 24, "eTPU_A", 20);
+place_and_gate_ex("eTPU_A", 23, "eTPU_A", 25, "eTPU_A", 21);
+
+// feed bus pins into inputs
+place_buffer_ex("eTPU_A", 20, "eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SCL_IN_OFFSET);
+place_buffer_ex("eTPU_A", 20, "eTPU_B", I2C_SLAVE1_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+place_buffer_ex("eTPU_A", 20, "eTPU_C", I2C_SLAVE2_CHAN + ETPU_I2C_SLAVE_SCL_IN_OFFSET);
+place_buffer_ex("eTPU_A", 21, "eTPU_A", I2C_MASTER_CHAN + ETPU_I2C_MASTER_SDA_IN_OFFSET);
+place_buffer_ex("eTPU_A", 21, "eTPU_B", I2C_SLAVE1_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+place_buffer_ex("eTPU_A", 21, "eTPU_C", I2C_SLAVE2_CHAN + ETPU_I2C_SLAVE_SDA_IN_OFFSET);
+
+
+
+//--------------------------------------------------------
+//  That is all she wrote!!
+#ifdef _ASH_WARE_AUTO_RUN_
+// exit done from Host target script
+//wait_time(300);
+//exit();
+#else
+wait_time(10050);
+#endif // _ASH_WARE_AUTO_RUN_
