@@ -41,15 +41,6 @@
       <ScopeChan index="16" name="_ch2.in" alias="SDA_in_slave2" target_index="3" height="31" chan_state_mask="255" />
       <ScopeChan index="17" name="_ch3.out" alias="SDA_out_slave2" target_index="3" height="31" chan_state_mask="255" />
       <ScopeChan index="18" name="_ThreadsIdle" alias="_ThreadsIdle_C" target_index="3" height="31" />
-      <ScopeChan index="-1" name="_ch10.in" alias="SCL_in_slave" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch12.in" alias="SDA_in_slave" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch14.in" alias="SCL_in_slave_2" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch16.in" alias="SDA_in_slave_2" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch11.out" alias="SCL_out_slave" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch13.out" alias="SDA_out_slave" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch15.out" alias="SCL_out_slave_2" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="_ch17.out" alias="SDA_out_slave_2" target_index="1" height="0" chan_state_mask="255" snap_chan_flags="true" />
-      <ScopeChan index="-1" name="__ANGLE_MODE" target_index="1" height="0" is_internal="True" is_discrete="True" sym_chan_hint="0" />
     </ScopeChannels>
   </TabPage>
   <TabPage type="Breakpoint" is_closed="true" ctrl="projectTabControl" />

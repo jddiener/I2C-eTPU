@@ -365,11 +365,11 @@ int user_main()
 	at_time(8000);
 
 	/* shutdown the I2C drivers */
-	if (aw_etpu_i2c_shutdown(EM_AB, i2c_master_instance.base_chan_num))
+	if (aw_etpu_i2c_shutdown(i2c_master_instance.em, i2c_master_instance.base_chan_num))
 		return 1;
-	if (aw_etpu_i2c_shutdown(EM_AB, i2c_slave1_instance.base_chan_num))
+	if (aw_etpu_i2c_shutdown(i2c_slave1_instance.em, i2c_slave1_instance.base_chan_num))
 		return 1;
-	if (aw_etpu_i2c_shutdown(EM_AB, i2c_slave2_instance.base_chan_num))
+	if (aw_etpu_i2c_shutdown(i2c_slave2_instance.em, i2c_slave2_instance.base_chan_num))
 		return 1;
 
 

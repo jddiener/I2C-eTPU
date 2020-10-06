@@ -82,6 +82,9 @@ int32_t aw_etpu_i2c_slave_init(
 	eTPU->CHAN[channel+2].CR.B.CPBA = i2c_slave_cpba;
 	eTPU->CHAN[channel+3].CR.B.CPBA = i2c_slave_cpba;
 
+	p_i2c_slave_instance->p_cpba = (void*)pba;
+	p_i2c_slave_instance->p_cpba_pse = (void*)((uint32_t)pba + (fs_etpu_data_ram_ext - fs_etpu_data_ram_start));
+
 	/* initialize the parameter values */
 	fs_memset32_ext(pba, 0, _FRAME_SIZE_I2C_slave_); // zero everything
 

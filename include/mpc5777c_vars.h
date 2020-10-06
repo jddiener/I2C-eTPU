@@ -16,17 +16,17 @@ volatile struct eTPU_struct * const eTPU_AB = (struct eTPU_struct *)0xC3FC0000;
 /* make default eTPU module eTPU-AB */
 volatile struct eTPU_struct * const eTPU = (struct eTPU_struct *)0xC3FC0000;
 
-uint32_t fs_etpu_code_start =     0xC3FD0000;
-uint32_t fs_etpu_data_ram_start = 0xC3FC8000;
-uint32_t fs_etpu_data_ram_end =   0xC3FC97FC;
-uint32_t fs_etpu_data_ram_ext =   0xC3FCC000;
+const uint32_t fs_etpu_code_start =     0xC3FD0000;
+const uint32_t fs_etpu_data_ram_start = 0xC3FC8000;
+const uint32_t fs_etpu_data_ram_end =   0xC3FC97FC;
+const uint32_t fs_etpu_data_ram_ext =   0xC3FCC000;
 
 /* no C module on this part - set addresses to 0 */
 volatile struct eTPU_struct * const eTPU_C  = (struct eTPU_struct *)0xFFE00000; 
-uint32_t fs_etpu_c_code_start =     0xFFE10000;
-uint32_t fs_etpu_c_data_ram_start = 0xFFE08000;
-uint32_t fs_etpu_c_data_ram_end =   0xFFE08BFC;
-uint32_t fs_etpu_c_data_ram_ext =   0xFFE0C000;
+const uint32_t fs_etpu_c_code_start =     0xFFE10000;
+const uint32_t fs_etpu_c_data_ram_start = 0xFFE08000;
+const uint32_t fs_etpu_c_data_ram_end =   0xFFE08BFC;
+const uint32_t fs_etpu_c_data_ram_ext =   0xFFE0C000;
 
 /*********************************************************************
  *

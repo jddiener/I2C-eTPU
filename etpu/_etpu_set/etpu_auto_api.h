@@ -12,7 +12,7 @@
 #define ETPU_AUTO_API_H_
 
 #include "etpu_set_defines.h"
-#if 0
+#if defined(MPC5777C)
 #include "etpu_c_set_defines.h"
 #endif
 
@@ -26,7 +26,7 @@ typedef unsigned int    etpu_if_uint32;
 typedef signed int      etpu_if_sint32;
 
 #include "etpu_set_struct.h"
-#if 0
+#if defined(MPC5777C)
 #include "etpu_c_set_struct.h"
 #endif
 
